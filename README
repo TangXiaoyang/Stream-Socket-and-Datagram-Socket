@@ -1,0 +1,34 @@
+Xiaoyang Tang
+9680642307
+
+In this project, I refered Beej's code to connect 4 hosts, the client, the edge server, the "or" server and the "and" server by sockets. The client and the edge server are connected by TCP and the edge server is connected to the "or" server and the "and" server by UDP. Using stream socket and datagram socket acheived the connections. And then, I implemented several functions on each host. On the client, there are functions that read the contend of a file, count the lines of data. On the edge server, there are functions count data lines, transform data format and send and receive data.
+
+
+client.cpp: It reads data from a file and send them in format to the edge server and receive the calculation result from the edge server.
+
+edge.cpp: It is responsible for receive the data sent by the client and send them to corresponding backend server for corresponding calculation. And then send back the results to the client in the order the client sends.
+
+server_or.cpp: It is responsible for the "or" calculation and recieve data from and send data to the edge server.
+
+server_and.cpp: It is responsible for the "and" calculation and recieve data from and send data to the edge server.
+
+
+The order of run the program is just as described in the instruction: 1. the backend server(server_or and server_and either could be the first and the other be the second) 2. the edge server 3. the client.
+To boot up the server_or, type "make server_or"
+To boot up the server_and, type "make server_and"
+To boot up the edge server, type "make edge"
+To boot up the client and read the file, type "./client filename"
+
+
+message format:
+the file --> the client: text --> string
+the client <--> the edge server: char array <--> char array
+the edge server <--> the backend servers: char array <--> char array
+
+
+I used code from Beej's instruction for the connection of the hosts. I have identified which part comes from Beej with comments in my source code.
+
+
+I used -std=g++11 tag in my compile command
+
+
